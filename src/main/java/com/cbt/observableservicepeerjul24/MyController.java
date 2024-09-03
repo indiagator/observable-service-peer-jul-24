@@ -23,4 +23,16 @@ public class MyController
 
         return "Hello for Observable-Peer";
     }
+
+    @Observed(name = "handler.hello",
+            contextualName = "handler-hello",
+            lowCardinalityKeyValues = {"handlerType", "test"})
+    @GetMapping("/async-hello")
+    public String async_hello(HttpServletRequest request)
+    {
+        String traceId = request.getHeader("traceparent");
+        log.info("traceparent: "+traceId);
+
+        return "Hello for Observable-Peer";
+    }
 }
